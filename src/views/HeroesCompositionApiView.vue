@@ -1,12 +1,5 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-import HeroesOptionApiList from '@/components/HeroesOptionApiList.vue'
+<script setup lang="ts">
 import HeroesCompositionApiList from '@/components/HeroesCompositionApiList.vue'
-
-export default defineComponent({
-    name: 'HeroesCompositionApiView',
-    components: { HeroesCompositionApiList },
-})
 </script>
 
 <template>
