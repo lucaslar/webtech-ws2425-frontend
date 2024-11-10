@@ -29,7 +29,7 @@ onMounted(() => {
     <p v-if="heroes.length === 0" class="warning">Es gibt noch keine Helden</p>
 
     <ul>
-        <li v-for="hero of heroes">{{ hero }}</li>
+        <li v-for="hero of heroes" v-bind:key="hero">{{ hero }}</li>
     </ul>
 </template>
 
