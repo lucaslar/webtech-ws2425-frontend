@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import HeroesOptionsApiView from '@/views/HeroesOptionsApiView.vue'
 import HeroesCompositionApiView from '@/views/HeroesCompositionApiView.vue'
+import HeroesView from '@/views/HeroesView.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -24,7 +25,16 @@ const router = createRouter({
             name: 'heroes-options-api',
             component: HeroesOptionsApiView,
         },
-        { path: '/heroes-composition-api', name: 'heroes-composition-api', component: HeroesCompositionApiView },
+        {
+            path: '/heroes-composition-api',
+            name: 'heroes-composition-api',
+            component: HeroesCompositionApiView,
+        },
+        {
+            path: '/heroes',
+            name: 'heroes',
+            component: HeroesView,
+        },
     ],
 })
 

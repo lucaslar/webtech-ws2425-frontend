@@ -13,8 +13,9 @@ import HelloWorld from './components/HelloWorld.vue'
             <nav>
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/about">About</RouterLink>
-                <RouterLink to="/heroes-options-api">Heroes (OA)</RouterLink>
-                <RouterLink to="/heroes-composition-api">Heroes (CA)</RouterLink>
+                <RouterLink to="/heroes-options-api">Heroes (Options API, lecture 2024-11-07)</RouterLink>
+                <RouterLink to="/heroes-composition-api">Heroes (Composition API, lecture 2024-11-07)</RouterLink>
+                <RouterLink to="/heroes">Heroes (continued)</RouterLink>
             </nav>
         </div>
     </header>
