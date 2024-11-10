@@ -22,6 +22,9 @@ onMounted(() => {
 
 <template>
     <h1>{{ title }}</h1>
+
+    <p>This component has been implemented using Vue‘s Composition API.</p>
+
     <button @click="someMethod()">CLICK ME! (check browser console)</button>
     <input v-model="inputData" />
     <button @click="saveHero()">Save hero</button>
