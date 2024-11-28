@@ -3,8 +3,8 @@ import { onMounted, ref } from 'vue'
 
 defineProps<{ title: string }>()
 
-let inputData = ref('das ist ein input ')
-const heroes = ref([])
+const inputData = ref('das ist ein input ')
+const heroes = ref<string[]>([])
 
 function someMethod(): void {
     console.log('Hallo HTW 2')

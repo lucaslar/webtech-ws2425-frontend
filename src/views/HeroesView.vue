@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import HeroCard from '@/components/HeroCard.vue'
 
 const inputData = ref('')
-const heroes = ref([])
+const heroes = ref<string[]>([])
 
 function addHero(): void {
     heroes.value.push(inputData.value.trim())
