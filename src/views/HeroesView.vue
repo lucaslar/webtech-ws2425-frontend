@@ -4,12 +4,13 @@ import HeroCard from '@/components/HeroCard.vue'
 import axios from 'axios'
 import type { Hero } from '@/model/hero'
 
+const apiEndpoint = import.meta.env.VITE_APP_BACKEND_BASE_URL + '/api/heroes'
 const inputData = ref('')
 const heroes = ref<Hero[]>([])
 
 function addHero(): void {
     axios
-        .post<Hero>('http://localhost:8080/api/heroes', { name: inputData.value })
+        .post<Hero>(apiEndpoint, { name: inputData.value })
         .then((res) => {
             inputData.value = ''
             heroes.value.push(res.data)
@@ -20,7 +21,7 @@ function addHero(): void {
 async function removeHero(id: number): Promise<void> {
     // Example with async / await instead of callbacks
     try {
-        const response = await axios.delete(`http://localhost:8080/api/heroes/${id}`)
+        const response = await axios.delete(`${apiEndpoint}/${id}`)
         console.log(response) // even though there is not much to see here ...
         heroes.value = heroes.value.filter((hero) => hero.id !== id)
     } catch (err) {
@@ -35,7 +36,7 @@ function logError(err: unknown): void {
 
 onMounted(() => {
     axios
-        .get<Hero[]>('http://localhost:8080/api/heroes')
+        .get<Hero[]>(apiEndpoint)
         .then((res) => (heroes.value = res.data))
         .catch((err) => logError(err))
 })
