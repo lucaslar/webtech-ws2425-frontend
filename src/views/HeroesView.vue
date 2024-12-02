@@ -1,18 +1,44 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import HeroCard from '@/components/HeroCard.vue'
+import axios from 'axios'
+import type { Hero } from '@/model/hero'
 
 const inputData = ref('')
-const heroes = ref<string[]>([])
+const heroes = ref<Hero[]>([])
 
 function addHero(): void {
-    heroes.value.push(inputData.value.trim())
-    inputData.value = ''
+    axios
+        .post<Hero>('http://localhost:8080/api/heroes', { name: inputData.value })
+        .then((res) => {
+            inputData.value = ''
+            heroes.value.push(res.data)
+        })
+        .catch((err) => logError(err))
 }
 
-function removeHero(index: number): void {
-    heroes.value = heroes.value.filter((h, i) => i !== index)
+async function removeHero(id: number): Promise<void> {
+    // Example with async / await instead of callbacks
+    try {
+        const response = await axios.delete(`http://localhost:8080/api/heroes/${id}`)
+        console.log(response) // even though there is not much to see here ...
+        heroes.value = heroes.value.filter((hero) => hero.id !== id)
+    } catch (err) {
+        logError(err)
+    }
 }
+
+function logError(err: unknown): void {
+    alert('Something went wrong ... check your browser console for more information')
+    console.error(err)
+}
+
+onMounted(() => {
+    axios
+        .get<Hero[]>('http://localhost:8080/api/heroes')
+        .then((res) => (heroes.value = res.data))
+        .catch((err) => logError(err))
+})
 </script>
 
 <template>
@@ -33,12 +59,7 @@ function removeHero(index: number): void {
 
         <p v-if="!heroes.length">No heroes yet :-(</p>
         <div id="hero-container" v-else>
-            <HeroCard
-                v-for="(hero, index) in heroes"
-                v-bind:key="hero"
-                :hero="hero"
-                @delete="removeHero(index)"
-            ></HeroCard>
+            <HeroCard v-for="hero in heroes" v-bind:key="hero.id" :hero="hero" @delete="removeHero(hero.id)"></HeroCard>
         </div>
     </main>
 </template>

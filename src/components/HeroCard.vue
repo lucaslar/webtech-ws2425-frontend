@@ -1,9 +1,10 @@
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, type PropType } from 'vue'
+import type { Hero } from '@/model/hero'
 
 export default defineComponent({
     name: 'HeroCard',
-    props: ['hero'], // Component input
+    props: { hero: { type: Object as PropType<Hero>, required: true } }, // Component input
     emits: ['delete'], // Component output
 })
 </script>
